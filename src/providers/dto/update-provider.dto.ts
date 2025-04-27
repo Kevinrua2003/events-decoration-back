@@ -1,0 +1,8 @@
+import { PartialType } from '@nestjs/swagger';
+import { CreateProviderDto } from './create-provider.dto';
+
+export class UpdateProviderDto{
+    name: string
+    phone: string
+    email: string
+}
