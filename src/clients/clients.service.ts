@@ -44,6 +44,10 @@ export class ClientsService {
     return clients.find(client => client.id === id) || null;
   }
 
+  findOneByEmail(email: string) {
+    return clients.find(client => client.email === email) || null;
+  }
+
   update(id: number, updateClientDto: UpdateClientDto) {
     const client = clients.find(client => client.id === id);
     if (!client) return null;
