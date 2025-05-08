@@ -30,6 +30,9 @@ let ClientsController = class ClientsController {
     findOne(id) {
         return this.clientsService.findOne(+id);
     }
+    findOneByEmail(email) {
+        return this.clientsService.findOneByEmail(email);
+    }
     update(id, updateClientDto) {
         return this.clientsService.update(+id, updateClientDto);
     }
@@ -58,6 +61,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ClientsController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Get)('email/:email'),
+    __param(0, (0, common_1.Param)('email')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ClientsController.prototype, "findOneByEmail", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

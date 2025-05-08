@@ -10,10 +10,11 @@ export class ContractsService {
   create(createContractDto: CreateContractDto) {
     const newId = contracts.length ? Math.max(...contracts.map(c => c.id)) + 1 : 1;
     const newContract: Contract = {
-      ...createContractDto,
       id: newId,
-      createdAt: new Date()
-  };
+      clientId: createContractDto.clientId,
+      eventId: createContractDto.eventId,
+      createdAt: createContractDto.createdAt
+    };
     contracts.push(newContract);
     return newContract;
   }

@@ -44,6 +44,9 @@ let ClientsService = class ClientsService {
     findOne(id) {
         return clients.find(client => client.id === id) || null;
     }
+    findOneByEmail(email) {
+        return clients.find(client => client.email === email) || null;
+    }
     update(id, updateClientDto) {
         const client = clients.find(client => client.id === id);
         if (!client)

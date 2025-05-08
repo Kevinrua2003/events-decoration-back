@@ -7,6 +7,7 @@ export declare class ClientsController {
     create(createClientDto: CreateClientDto): import("./entities/client.entity").Client;
     findAll(): import("./entities/client.entity").Client[];
     findOne(id: string): import("./entities/client.entity").Client | null;
+    findOneByEmail(email: string): import("./entities/client.entity").Client | null;
     update(id: string, updateClientDto: UpdateClientDto): import("./entities/client.entity").Client | null;
     remove(id: string): import("./entities/client.entity").Client | null;
 }

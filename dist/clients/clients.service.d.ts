@@ -5,6 +5,7 @@ export declare class ClientsService {
     create(createClientDto: CreateClientDto): Client;
     findAll(): Client[];
     findOne(id: number): Client | null;
+    findOneByEmail(email: string): Client | null;
     update(id: number, updateClientDto: UpdateClientDto): Client | null;
     remove(id: number): Client | null;
 }

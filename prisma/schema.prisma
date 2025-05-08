@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// --- Enums ---
+enum EventType {
+  WEDDING
+  BIRTHDAY
+  CORPORATE
+  OTHER
+}
+
+enum EmployeeRole {
+  CEO
+  HR_MANAGER
+  ACCOUNTING_MANAGER
+  UNION_SECRETARY
+  STAFF
+}
+
+enum ResourceType {
+  SERVICE
+  PRODUCT
+}
+
+// --- Core Models ---
+model Company {
+  id        Int      @id @default(autoincrement())
+  name      String
+  address   String
+  phone     String
+  logo      String?
+}
+
+model Client {
+  id        Int       @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String    @unique
+  phone     String
+  contracts Contract[]
+}
+
+model Event {
+  id          Int       @id @default(autoincrement())
+  name        String
+  type        EventType
+  startDate   DateTime
+  endDate     DateTime
+  location    String
+  amount      Float
+  contracts   Contract[]
+
+  @@index([startDate])
+}
+
+model Provider {
+  id        Int       @id @default(autoincrement())
+  name      String
+  phone     String
+  email     String
+  products  Product[]
+  services  Service[]
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String
+  price       Float
+  image       String
+  provider    Provider  @relation(fields: [providerId], references: [id])
+  providerId  Int
+}
+
+model Service {
+  id          Int       @id @default(autoincrement())
+  name        String
+  price       Float
+  description String
+  provider    Provider  @relation(fields: [providerId], references: [id])
+  providerId  Int
+}
+
+model Employee {
+  id          Int          @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  email       String       @unique
+  phone       String
+  role        EmployeeRole @default(STAFF)
+  username    String       @unique
+  password    String
+}
+
+// --- Contract Management ---
+model Contract {
+  id              Int                 @id @default(autoincrement())
+  client          Client              @relation(fields: [clientId], references: [id])
+  clientId        Int
+  event           Event               @relation(fields: [eventId], references: [id])
+  eventId         Int
+  resources       ContractItem[]
+  modifications   ContractModification[]
+  createdAt       DateTime            @default(now())
+
+  @@unique([clientId, eventId]) // One contract per client-event combination
+}
+
+model ContractItem {
+  id          Int       @id @default(autoincrement())
+  contract    Contract  @relation(fields: [contractId], references: [id])
+  contractId  Int
+  type        ResourceType
+  resourceId  Int       // Reference to Product.id or Service.id
+  quantity    Int       @default(1)
+  price       Float
+}
+
+model ContractModification {
+  id          Int       @id @default(autoincrement())
+  contract    Contract  @relation(fields: [contractId], references: [id])
+  contractId  Int
+  modifiedAt  DateTime  @default(now())
+  description String
+}
