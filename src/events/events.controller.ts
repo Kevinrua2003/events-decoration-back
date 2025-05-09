@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
+import { validateAmount, validateName } from 'src/utils/validations/events';
 
 @Controller('events')
 export class EventsController {
@@ -9,6 +10,13 @@ export class EventsController {
 
   @Post()
   create(@Body() createEventDto: CreateEventDto) {
+
+    const nameV = validateName(createEventDto.name);
+    const amountV = validateAmount(createEventDto.amount);
+    if (!nameV || !amountV) {
+      throw new Error(`Error with data ${nameV && ", name is not valid"} ${amountV && ", amount must be greater than 0"}`);
+    }
+
     return this.eventsService.create(createEventDto);
   }
 
