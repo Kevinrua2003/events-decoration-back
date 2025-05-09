@@ -2,63 +2,45 @@ import { Injectable } from '@nestjs/common';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { Client } from './entities/client.entity';
-
-const clients: Client[] = [
-    {
-        id: 1,
-        firstName: 'Alice',
-        lastName: 'Johnson',
-        email: 'alice.johnson@example.com',
-        phone: '555-0401'
-    },
-    {
-        id: 2,
-        firstName: 'Bob',
-        lastName: 'Smith',
-        email: 'bob.smith@example.com',
-        phone: '555-0402'
-    },
-    {
-        id: 3,
-        firstName: 'Charlie',
-        lastName: 'Brown',
-        email: 'charlie.brown@example.com',
-        phone: '555-0403'
-    },
-];
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class ClientsService {
+
+  constructor(private prisma: PrismaService){}
+
   create(createClientDto: CreateClientDto) {
-    const newId = clients.length ? Math.max(...clients.map(c => c.id)) + 1 : 1;
-    const newClient: Client = { id: newId, ...createClientDto };
-    clients.push(newClient);
-    return newClient;
+    return this.prisma.client.create({
+      data: {...createClientDto}
+    });
   }
 
   findAll() {
-    return clients;
+    return this.prisma.client.findMany();
   }
 
   findOne(id: number) {
-    return clients.find(client => client.id === id) || null;
+    return this.prisma.client.findUnique({
+      where: { id }
+    });
   }
 
   findOneByEmail(email: string) {
-    return clients.find(client => client.email === email) || null;
+    return this.prisma.client.findUnique({
+      where: { email: email }
+    });
   }
 
   update(id: number, updateClientDto: UpdateClientDto) {
-    const client = clients.find(client => client.id === id);
-    if (!client) return null;
-    Object.assign(client, updateClientDto);
-    return client;
+    return this.prisma.client.update({
+      where: { id },
+      data: { ...updateClientDto }
+    });
   }
 
   remove(id: number) {
-    const index = clients.findIndex(client => client.id === id);
-    if (index === -1) return null;
-    const removedClient = clients.splice(index, 1)[0];
-    return removedClient;
+    return this.prisma.client.delete({
+      where: { id }
+    });
   }
 }

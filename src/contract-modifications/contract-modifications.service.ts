@@ -1,44 +1,45 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
 import { CreateContractModificationDto } from './dto/create-contract-modification.dto';
 import { UpdateContractModificationDto } from './dto/update-contract-modification.dto';
-import { ContractModification } from './entities/contract-modification.entity';
-
-const contractModifications: ContractModification[] = [];
 
 @Injectable()
 export class ContractModificationsService {
+  constructor(private prisma: PrismaService) {}
+
   create(createContractModificationDto: CreateContractModificationDto) {
-    const newId = contractModifications.length ? Math.max(...contractModifications.map(mod => mod.id)) + 1 : 1;
-    const newModification: ContractModification = {
-      id: newId,
-      contractId: createContractModificationDto.contractId,
-      description: createContractModificationDto.description,
-      modifiedAt: new Date()
-    };
-    contractModifications.push(newModification);
-    return newModification;
+    return this.prisma.contractModification.create({
+      data: {
+        contractId: createContractModificationDto.contractId,
+        description: createContractModificationDto.description,
+        modifiedAt: new Date(),
+      },
+    });
   }
 
   findAll() {
-    return contractModifications;
+    return this.prisma.contractModification.findMany();
   }
 
   findOne(id: number) {
-    return contractModifications.find(mod => mod.id === id) || null;
+    return this.prisma.contractModification.findUnique({
+      where: { id },
+    });
   }
 
   update(id: number, updateContractModificationDto: UpdateContractModificationDto) {
-    const modification = contractModifications.find(mod => mod.id === id);
-    if (!modification) return null;
-    Object.assign(modification, updateContractModificationDto);
-    modification.modifiedAt = new Date();
-    return modification;
+    return this.prisma.contractModification.update({
+      where: { id },
+      data: {
+        ...updateContractModificationDto,
+        modifiedAt: new Date(),
+      },
+    });
   }
 
   remove(id: number) {
-    const index = contractModifications.findIndex(mod => mod.id === id);
-    if (index === -1) return null;
-    const removedModification = contractModifications.splice(index, 1)[0];
-    return removedModification;
+    return this.prisma.contractModification.delete({
+      where: { id },
+    });
   }
 }

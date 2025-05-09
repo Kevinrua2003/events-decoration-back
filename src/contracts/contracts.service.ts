@@ -1,43 +1,41 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
 import { CreateContractDto } from './dto/create-contract.dto';
 import { UpdateContractDto } from './dto/update-contract.dto';
-import { Contract } from './entities/contract.entity';
-
-const contracts: Contract[] = [];
 
 @Injectable()
 export class ContractsService {
+  constructor(private prisma: PrismaService) {}
+
   create(createContractDto: CreateContractDto) {
-    const newId = contracts.length ? Math.max(...contracts.map(c => c.id)) + 1 : 1;
-    const newContract: Contract = {
-      id: newId,
-      clientId: createContractDto.clientId,
-      eventId: createContractDto.eventId,
-      createdAt: createContractDto.createdAt
-    };
-    contracts.push(newContract);
-    return newContract;
+    return this.prisma.contract.create({
+      data: {
+        ...createContractDto,
+        createdAt: new Date(),
+      },
+    });
   }
 
   findAll() {
-    return contracts;
+    return this.prisma.contract.findMany();
   }
 
   findOne(id: number) {
-    return contracts.find(contract => contract.id === id) || null;
+    return this.prisma.contract.findUnique({
+      where: { id },
+    });
   }
 
   update(id: number, updateContractDto: UpdateContractDto) {
-    const contract = contracts.find(contract => contract.id === id);
-    if (!contract) return null;
-    Object.assign(contract, updateContractDto);
-    return contract;
+    return this.prisma.contract.update({
+      where: { id },
+      data: { ...updateContractDto },
+    });
   }
 
   remove(id: number) {
-    const index = contracts.findIndex(contract => contract.id === id);
-    if (index === -1) return null;
-    const removedContract = contracts.splice(index, 1)[0];
-    return removedContract;
+    return this.prisma.contract.delete({
+      where: { id },
+    });
   }
 }

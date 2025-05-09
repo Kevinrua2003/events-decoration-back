@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Employee, EmployeeRole } from './entities/employee.entity';
@@ -58,32 +59,34 @@ const employees: Employee[] = [
 
 @Injectable()
 export class EmployeesService {
+  constructor(private prisma: PrismaService) {}
+
   create(createEmployeeDto: CreateEmployeeDto) {
-    const newId = employees.length ? Math.max(...employees.map(emp => emp.id)) + 1 : 1;
-    const newEmployee: Employee = { id: newId, ...createEmployeeDto };
-    employees.push(newEmployee);
-    return newEmployee;
+    return this.prisma.employee.create({
+      data: createEmployeeDto,
+    });
   }
 
   findAll() {
-    return employees;
+    return this.prisma.employee.findMany();
   }
 
   findOne(id: number) {
-    return employees.find(emp => emp.id === id) || null;
+    return this.prisma.employee.findUnique({
+      where: { id },
+    });
   }
 
   update(id: number, updateEmployeeDto: UpdateEmployeeDto) {
-    const employee = employees.find(emp => emp.id === id);
-    if (!employee) return null;
-    Object.assign(employee, updateEmployeeDto);
-    return employee;
+    return this.prisma.employee.update({
+      where: { id },
+      data: updateEmployeeDto,
+    });
   }
 
   remove(id: number) {
-    const index = employees.findIndex(emp => emp.id === id);
-    if (index === -1) return null;
-    const removedEmployee = employees.splice(index, 1)[0];
-    return removedEmployee;
+    return this.prisma.employee.delete({
+      where: { id },
+    });
   }
 }
