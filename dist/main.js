@@ -13,7 +13,14 @@ async function bootstrap() {
         .build();
     const documentFactory = () => swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, documentFactory);
-    app.enableCors();
+    app.enableCors({
+        origin: [
+            'https://events-decoration-front.vercel.app',
+            'http://localhost:3000',
+        ],
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        credentials: true,
+    });
     await app.listen(process.env.PORT ?? 5000);
 }
 bootstrap();
