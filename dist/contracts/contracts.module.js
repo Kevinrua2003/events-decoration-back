@@ -10,13 +10,14 @@ exports.ContractsModule = void 0;
 const common_1 = require("@nestjs/common");
 const contracts_service_1 = require("./contracts.service");
 const contracts_controller_1 = require("./contracts.controller");
+const prisma_service_1 = require("../prisma.service");
 let ContractsModule = class ContractsModule {
 };
 exports.ContractsModule = ContractsModule;
 exports.ContractsModule = ContractsModule = __decorate([
     (0, common_1.Module)({
         controllers: [contracts_controller_1.ContractsController],
-        providers: [contracts_service_1.ContractsService],
+        providers: [contracts_service_1.ContractsService, prisma_service_1.PrismaService],
     })
 ], ContractsModule);
 //# sourceMappingURL=contracts.module.js.map

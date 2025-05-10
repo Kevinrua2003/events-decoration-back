@@ -5,46 +5,52 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContractModificationsService = void 0;
 const common_1 = require("@nestjs/common");
-const contractModifications = [];
+const prisma_service_1 = require("../prisma.service");
 let ContractModificationsService = class ContractModificationsService {
+    constructor(prisma) {
+        this.prisma = prisma;
+    }
     create(createContractModificationDto) {
-        const newId = contractModifications.length ? Math.max(...contractModifications.map(mod => mod.id)) + 1 : 1;
-        const newModification = {
-            id: newId,
-            contractId: createContractModificationDto.contractId,
-            description: createContractModificationDto.description,
-            modifiedAt: new Date()
-        };
-        contractModifications.push(newModification);
-        return newModification;
+        return this.prisma.contractModification.create({
+            data: {
+                contractId: createContractModificationDto.contractId,
+                description: createContractModificationDto.description,
+                modifiedAt: new Date(),
+            },
+        });
     }
     findAll() {
-        return contractModifications;
+        return this.prisma.contractModification.findMany();
     }
     findOne(id) {
-        return contractModifications.find(mod => mod.id === id) || null;
+        return this.prisma.contractModification.findUnique({
+            where: { id },
+        });
     }
     update(id, updateContractModificationDto) {
-        const modification = contractModifications.find(mod => mod.id === id);
-        if (!modification)
-            return null;
-        Object.assign(modification, updateContractModificationDto);
-        modification.modifiedAt = new Date();
-        return modification;
+        return this.prisma.contractModification.update({
+            where: { id },
+            data: {
+                ...updateContractModificationDto,
+                modifiedAt: new Date(),
+            },
+        });
     }
     remove(id) {
-        const index = contractModifications.findIndex(mod => mod.id === id);
-        if (index === -1)
-            return null;
-        const removedModification = contractModifications.splice(index, 1)[0];
-        return removedModification;
+        return this.prisma.contractModification.delete({
+            where: { id },
+        });
     }
 };
 exports.ContractModificationsService = ContractModificationsService;
 exports.ContractModificationsService = ContractModificationsService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], ContractModificationsService);
 //# sourceMappingURL=contract-modifications.service.js.map

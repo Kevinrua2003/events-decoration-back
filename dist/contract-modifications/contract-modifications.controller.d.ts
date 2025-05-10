@@ -4,9 +4,34 @@ import { UpdateContractModificationDto } from './dto/update-contract-modificatio
 export declare class ContractModificationsController {
     private readonly contractModificationsService;
     constructor(contractModificationsService: ContractModificationsService);
-    create(createContractModificationDto: CreateContractModificationDto): import("./entities/contract-modification.entity").ContractModification;
-    findAll(): import("./entities/contract-modification.entity").ContractModification[];
-    findOne(id: string): import("./entities/contract-modification.entity").ContractModification | null;
-    update(id: string, updateContractModificationDto: UpdateContractModificationDto): import("./entities/contract-modification.entity").ContractModification | null;
-    remove(id: string): import("./entities/contract-modification.entity").ContractModification | null;
+    create(createContractModificationDto: CreateContractModificationDto): import("@prisma/client").Prisma.Prisma__ContractModificationClient<{
+        id: number;
+        description: string;
+        contractId: number;
+        modifiedAt: Date;
+    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
+    findAll(): import("@prisma/client").Prisma.PrismaPromise<{
+        id: number;
+        description: string;
+        contractId: number;
+        modifiedAt: Date;
+    }[]>;
+    findOne(id: string): import("@prisma/client").Prisma.Prisma__ContractModificationClient<{
+        id: number;
+        description: string;
+        contractId: number;
+        modifiedAt: Date;
+    } | null, null, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
+    update(id: string, updateContractModificationDto: UpdateContractModificationDto): import("@prisma/client").Prisma.Prisma__ContractModificationClient<{
+        id: number;
+        description: string;
+        contractId: number;
+        modifiedAt: Date;
+    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
+    remove(id: string): import("@prisma/client").Prisma.Prisma__ContractModificationClient<{
+        id: number;
+        description: string;
+        contractId: number;
+        modifiedAt: Date;
+    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
 }

@@ -10,13 +10,14 @@ exports.EmployeesModule = void 0;
 const common_1 = require("@nestjs/common");
 const employees_service_1 = require("./employees.service");
 const employees_controller_1 = require("./employees.controller");
+const prisma_service_1 = require("../prisma.service");
 let EmployeesModule = class EmployeesModule {
 };
 exports.EmployeesModule = EmployeesModule;
 exports.EmployeesModule = EmployeesModule = __decorate([
     (0, common_1.Module)({
         controllers: [employees_controller_1.EmployeesController],
-        providers: [employees_service_1.EmployeesService],
+        providers: [employees_service_1.EmployeesService, prisma_service_1.PrismaService],
     })
 ], EmployeesModule);
 //# sourceMappingURL=employees.module.js.map

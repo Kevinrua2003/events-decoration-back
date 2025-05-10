@@ -17,11 +17,17 @@ const common_1 = require("@nestjs/common");
 const events_service_1 = require("./events.service");
 const create_event_dto_1 = require("./dto/create-event.dto");
 const update_event_dto_1 = require("./dto/update-event.dto");
+const validations_1 = require("./validations/validations");
 let EventsController = class EventsController {
     constructor(eventsService) {
         this.eventsService = eventsService;
     }
     create(createEventDto) {
+        const nameV = (0, validations_1.validateName)(createEventDto.name);
+        const amountV = (0, validations_1.validateAmount)(createEventDto.amount);
+        if (!nameV || !amountV) {
+            throw new Error(`Error with data ${nameV && ", name is not valid"} ${amountV && ", amount must be greater than 0"}`);
+        }
         return this.eventsService.create(createEventDto);
     }
     findAll() {

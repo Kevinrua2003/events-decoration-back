@@ -5,9 +5,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmployeesService = void 0;
 const common_1 = require("@nestjs/common");
+const prisma_service_1 = require("../prisma.service");
 const employee_entity_1 = require("./entities/employee.entity");
 const employees = [
     {
@@ -62,35 +66,37 @@ const employees = [
     },
 ];
 let EmployeesService = class EmployeesService {
+    constructor(prisma) {
+        this.prisma = prisma;
+    }
     create(createEmployeeDto) {
-        const newId = employees.length ? Math.max(...employees.map(emp => emp.id)) + 1 : 1;
-        const newEmployee = { id: newId, ...createEmployeeDto };
-        employees.push(newEmployee);
-        return newEmployee;
+        return this.prisma.employee.create({
+            data: createEmployeeDto,
+        });
     }
     findAll() {
-        return employees;
+        return this.prisma.employee.findMany();
     }
     findOne(id) {
-        return employees.find(emp => emp.id === id) || null;
+        return this.prisma.employee.findUnique({
+            where: { id },
+        });
     }
     update(id, updateEmployeeDto) {
-        const employee = employees.find(emp => emp.id === id);
-        if (!employee)
-            return null;
-        Object.assign(employee, updateEmployeeDto);
-        return employee;
+        return this.prisma.employee.update({
+            where: { id },
+            data: updateEmployeeDto,
+        });
     }
     remove(id) {
-        const index = employees.findIndex(emp => emp.id === id);
-        if (index === -1)
-            return null;
-        const removedEmployee = employees.splice(index, 1)[0];
-        return removedEmployee;
+        return this.prisma.employee.delete({
+            where: { id },
+        });
     }
 };
 exports.EmployeesService = EmployeesService;
 exports.EmployeesService = EmployeesService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], EmployeesService);
 //# sourceMappingURL=employees.service.js.map

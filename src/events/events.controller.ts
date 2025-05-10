@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
-import { validateAmount, validateName } from 'src/utils/validations/events';
+import { validateAmount, validateName } from './validations/validations';
 
 @Controller('events')
 export class EventsController {
