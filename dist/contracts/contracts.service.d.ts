@@ -4,34 +4,34 @@ import { UpdateContractDto } from './dto/update-contract.dto';
 export declare class ContractsService {
     private prisma;
     constructor(prisma: PrismaService);
-    create(createContractDto: CreateContractDto): import("@prisma/client").Prisma.Prisma__ContractClient<{
+    create(createContractDto: CreateContractDto): import("prisma/generated/client").Prisma.Prisma__ContractClient<{
         id: number;
         clientId: number;
         eventId: number;
         createdAt: Date;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    findAll(): import("@prisma/client").Prisma.PrismaPromise<{
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    findAll(): import("prisma/generated/client").Prisma.PrismaPromise<{
         id: number;
         clientId: number;
         eventId: number;
         createdAt: Date;
     }[]>;
-    findOne(id: number): import("@prisma/client").Prisma.Prisma__ContractClient<{
+    findOne(id: number): import("prisma/generated/client").Prisma.Prisma__ContractClient<{
         id: number;
         clientId: number;
         eventId: number;
         createdAt: Date;
-    } | null, null, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    update(id: number, updateContractDto: UpdateContractDto): import("@prisma/client").Prisma.Prisma__ContractClient<{
+    } | null, null, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    update(id: number, updateContractDto: UpdateContractDto): import("prisma/generated/client").Prisma.Prisma__ContractClient<{
         id: number;
         clientId: number;
         eventId: number;
         createdAt: Date;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    remove(id: number): import("@prisma/client").Prisma.Prisma__ContractClient<{
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    remove(id: number): import("prisma/generated/client").Prisma.Prisma__ContractClient<{
         id: number;
         clientId: number;
         eventId: number;
         createdAt: Date;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
 }

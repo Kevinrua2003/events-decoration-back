@@ -4,34 +4,34 @@ import { UpdateProviderDto } from './dto/update-provider.dto';
 export declare class ProvidersController {
     private readonly providersService;
     constructor(providersService: ProvidersService);
-    create(createProviderDto: CreateProviderDto): import("@prisma/client").Prisma.Prisma__ProviderClient<{
+    create(createProviderDto: CreateProviderDto): import("prisma/generated/client").Prisma.Prisma__ProviderClient<{
         id: number;
         name: string;
         email: string;
         phone: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    findAll(): import("@prisma/client").Prisma.PrismaPromise<{
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    findAll(): import("prisma/generated/client").Prisma.PrismaPromise<{
         id: number;
         name: string;
         email: string;
         phone: string;
     }[]>;
-    findOne(id: string): import("@prisma/client").Prisma.Prisma__ProviderClient<{
+    findOne(id: string): import("prisma/generated/client").Prisma.Prisma__ProviderClient<{
         id: number;
         name: string;
         email: string;
         phone: string;
-    } | null, null, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    update(id: string, updateProviderDto: UpdateProviderDto): import("@prisma/client").Prisma.Prisma__ProviderClient<{
+    } | null, null, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    update(id: string, updateProviderDto: UpdateProviderDto): import("prisma/generated/client").Prisma.Prisma__ProviderClient<{
         id: number;
         name: string;
         email: string;
         phone: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    remove(id: string): import("@prisma/client").Prisma.Prisma__ProviderClient<{
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    remove(id: string): import("prisma/generated/client").Prisma.Prisma__ProviderClient<{
         id: number;
         name: string;
         email: string;
         phone: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
 }

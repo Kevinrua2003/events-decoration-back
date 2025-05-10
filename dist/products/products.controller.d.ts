@@ -4,39 +4,39 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export declare class ProductsController {
     private readonly productsService;
     constructor(productsService: ProductsService);
-    create(createProductDto: CreateProductDto): import("@prisma/client").Prisma.Prisma__ProductClient<{
+    create(createProductDto: CreateProductDto): import("prisma/generated/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;
         providerId: number;
         image: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    findAll(): import("@prisma/client").Prisma.PrismaPromise<{
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    findAll(): import("prisma/generated/client").Prisma.PrismaPromise<{
         id: number;
         name: string;
         price: number;
         providerId: number;
         image: string;
     }[]>;
-    findOne(id: string): import("@prisma/client").Prisma.Prisma__ProductClient<{
+    findOne(id: string): import("prisma/generated/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;
         providerId: number;
         image: string;
-    } | null, null, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    update(id: string, updateProductDto: UpdateProductDto): import("@prisma/client").Prisma.Prisma__ProductClient<{
+    } | null, null, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    update(id: string, updateProductDto: UpdateProductDto): import("prisma/generated/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;
         providerId: number;
         image: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    remove(id: string): import("@prisma/client").Prisma.Prisma__ProductClient<{
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    remove(id: string): import("prisma/generated/client").Prisma.Prisma__ProductClient<{
         id: number;
         name: string;
         price: number;
         providerId: number;
         image: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
 }

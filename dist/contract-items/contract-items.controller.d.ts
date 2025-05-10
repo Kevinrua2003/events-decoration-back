@@ -4,44 +4,44 @@ import { UpdateContractItemDto } from './dto/update-contract-item.dto';
 export declare class ContractItemsController {
     private readonly contractItemsService;
     constructor(contractItemsService: ContractItemsService);
-    create(createContractItemDto: CreateContractItemDto): import("@prisma/client").Prisma.Prisma__ContractItemClient<{
+    create(createContractItemDto: CreateContractItemDto): import("prisma/generated/client").Prisma.Prisma__ContractItemClient<{
         id: number;
-        type: import("@prisma/client").$Enums.ResourceType;
+        type: import("prisma/generated/client").$Enums.ResourceType;
         price: number;
         contractId: number;
         resourceId: number;
         quantity: number;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    findAll(): import("@prisma/client").Prisma.PrismaPromise<{
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    findAll(): import("prisma/generated/client").Prisma.PrismaPromise<{
         id: number;
-        type: import("@prisma/client").$Enums.ResourceType;
+        type: import("prisma/generated/client").$Enums.ResourceType;
         price: number;
         contractId: number;
         resourceId: number;
         quantity: number;
     }[]>;
-    findOne(id: string): import("@prisma/client").Prisma.Prisma__ContractItemClient<{
+    findOne(id: string): import("prisma/generated/client").Prisma.Prisma__ContractItemClient<{
         id: number;
-        type: import("@prisma/client").$Enums.ResourceType;
+        type: import("prisma/generated/client").$Enums.ResourceType;
         price: number;
         contractId: number;
         resourceId: number;
         quantity: number;
-    } | null, null, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    update(id: string, updateContractItemDto: UpdateContractItemDto): import("@prisma/client").Prisma.Prisma__ContractItemClient<{
+    } | null, null, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    update(id: string, updateContractItemDto: UpdateContractItemDto): import("prisma/generated/client").Prisma.Prisma__ContractItemClient<{
         id: number;
-        type: import("@prisma/client").$Enums.ResourceType;
+        type: import("prisma/generated/client").$Enums.ResourceType;
         price: number;
         contractId: number;
         resourceId: number;
         quantity: number;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
-    remove(id: string): import("@prisma/client").Prisma.Prisma__ContractItemClient<{
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
+    remove(id: string): import("prisma/generated/client").Prisma.Prisma__ContractItemClient<{
         id: number;
-        type: import("@prisma/client").$Enums.ResourceType;
+        type: import("prisma/generated/client").$Enums.ResourceType;
         price: number;
         contractId: number;
         resourceId: number;
         quantity: number;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs, import("@prisma/client").Prisma.PrismaClientOptions>;
+    }, never, import("prisma/generated/client/runtime/library").DefaultArgs, import("prisma/generated/client").Prisma.PrismaClientOptions>;
 }
