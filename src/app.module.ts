@@ -8,10 +8,11 @@ import { ContractsModule } from './contracts/contracts.module';
 import { ContractItemsModule } from './contract-items/contract-items.module';
 import { ContractModificationsModule } from './contract-modifications/contract-modifications.module';
 import { ClientsModule } from './clients/clients.module';
+import { PrismaService } from './prisma.service';
 
 @Module({
   imports: [EventsModule, ServicesModule, ProductsModule, EmployeesModule, ProvidersModule, ContractsModule, ContractItemsModule, ContractModificationsModule, ClientsModule],
   controllers: [],
-  providers: [],
+  providers: [PrismaService],
 })
 export class AppModule {}

@@ -17,6 +17,7 @@ const contracts_module_1 = require("./contracts/contracts.module");
 const contract_items_module_1 = require("./contract-items/contract-items.module");
 const contract_modifications_module_1 = require("./contract-modifications/contract-modifications.module");
 const clients_module_1 = require("./clients/clients.module");
+const prisma_service_1 = require("./prisma.service");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -24,7 +25,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [events_module_1.EventsModule, services_module_1.ServicesModule, products_module_1.ProductsModule, employees_module_1.EmployeesModule, providers_module_1.ProvidersModule, contracts_module_1.ContractsModule, contract_items_module_1.ContractItemsModule, contract_modifications_module_1.ContractModificationsModule, clients_module_1.ClientsModule],
         controllers: [],
-        providers: [],
+        providers: [prisma_service_1.PrismaService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
