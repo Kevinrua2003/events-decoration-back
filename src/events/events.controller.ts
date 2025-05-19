@@ -10,11 +10,19 @@ export class EventsController {
 
   @Post()
   create(@Body() createEventDto: CreateEventDto) {
+    const nameIsValid = validateName(createEventDto.name);
+    const amountIsValid = validateAmount(createEventDto.amount);
 
-    const nameV = validateName(createEventDto.name);
-    const amountV = validateAmount(createEventDto.amount);
-    if (!nameV || !amountV) {
-      throw new Error(`Error with data ${nameV && ", name is not valid"} ${amountV && ", amount must be greater than 0"}`);
+    const errors: string[] = [];
+    if (!nameIsValid) {
+      errors.push("Name is not valid");
+    }
+    if (!amountIsValid) {
+      errors.push("Amount must be greater than 0");
+    }
+    
+    if (errors.length) {
+      throw new Error(`Error with data: ${errors.join(" and ")}`);
     }
 
     return this.eventsService.create(createEventDto);
